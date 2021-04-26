@@ -1,4 +1,4 @@
-def cria_baralho():
+def cria_baralho():             #Primeira função na página do EP2
     cartas = []
     naipe = ['♠', '♥', '♦', '♣']
     k = -1
@@ -15,6 +15,3 @@ def cria_baralho():
                 i = 'A'
             cartas.append(str(i) + naipe[k])
     return cartas
-
-
-print(cria_baralho())
