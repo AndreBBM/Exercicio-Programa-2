@@ -1,5 +1,9 @@
+import random
+
+
 def cria_baralho():             #Primeira função na página do EP2
     cartas = []
+    embaralhado = []
     naipe = ['♠', '♥', '♦', '♣']
     k = -1
     while len(cartas) != 52:    #repete o loop a seguir 4 vezes, mudando o naipe
@@ -14,4 +18,7 @@ def cria_baralho():             #Primeira função na página do EP2
             elif i == 14:
                 i = 'A'
             cartas.append(str(i) + naipe[k])
-    return cartas
+    while len(cartas) > 0:      #Embaralha a sequência de cartas
+        embaralhado.append(cartas[random.randint(0, len(cartas) - 1)])
+        cartas.remove(embaralhado[len(embaralhado) - 1])
+    return embaralhado
