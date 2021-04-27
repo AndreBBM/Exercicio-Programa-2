@@ -23,7 +23,7 @@ def cria_baralho():             # Primeira função na página do EP2
     return embaralhado          # Cartas são dadas assim
 
 def extrai_naipe(carta):        # Segunda função na página do EP2
-    naipe = carta[-1]
+    naipe = carta[-1]           # Selecionar a última posição = naipe
     return naipe
 # Escolher qual das duas usar
 def extrai_naipe(carta):
@@ -34,9 +34,9 @@ def extrai_naipe(carta):
      return naipe
 
 def extrai_valor(carta):        # Terceira função na página do EP2
-    if len(carta) == 2:
+    if len(carta) == 2:         # Se for um número de um algarismo, pegar somente a primeira posição
         return carta[0]
-    if len(carta) == 3:
+    if len(carta) == 3:         # Se for um número de dois algarismos, pegar as duas primeiras posições
         return carta[0:2]
 
 def lista_movimentos_possiveis(b,i):  # Quarta função na página do EP2  -> b = baralho; i = índice
@@ -53,9 +53,11 @@ def lista_movimentos_possiveis(b,i):  # Quarta função na página do EP2  -> b 
         mov_pos.append(3)
     return mov_pos
 
-    # INCOMPLETA #
 def empilha(baralho, i, f):     # Quinta função na página do EP2
-    destino = baralho[f]
-    origem = baralho[i]
-    del baralho[f]
-    return baralho
+    if (i - f) == 1:            # Se for trocar com a anterior, simplismente apagar a anterior (o destino)
+        del baralho[f]
+        return baralho
+    if (i - f) == 3:            # Se for trocar com 3 cartas anteriores, destino = origem. Apagar origem
+        baralho[f] = baralho[i]
+        del baralho[i]
+        return baralho
