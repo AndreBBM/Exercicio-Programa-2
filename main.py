@@ -1,6 +1,5 @@
 import random
 
-
 def cria_baralho():             # Primeira função na página do EP2
     cartas = []
     embaralhado = []
@@ -40,16 +39,23 @@ def extrai_valor(carta):        # Terceira função na página do EP2
     if len(carta) == 3:
         return carta[0:2]
 
-def lista_movimentos_possiveis(baralho,i):  # Quarta função na página do EP2
-    mov_pos = []
-    if i == 0:
+def lista_movimentos_possiveis(b,i):  # Quarta função na página do EP2  -> b = baralho; i = índice
+    mov_pos = []                      # Lista de movimentos possíveis
+    if i == 0:                      
         return mov_pos
-    if i < len(baralho) and i > 0 and extrai_naipe(baralho[i]) == extrai_naipe(baralho[i-1]) or extrai_valor(baralho[i]) == extrai_valor(baralho[i-1]):
+    if i < len(b) and i > 0 and extrai_naipe(b[i]) == extrai_naipe(b[i-1]) or extrai_valor(b[i]) == extrai_valor(b[i-1]):
         mov_pos.append(1)
-    if i == 2 and extrai_naipe(baralho[i]) != extrai_naipe(baralho[i-1]) and extrai_valor(baralho[i]) != extrai_valor(baralho[i-1]):
+    if i == 2 and extrai_naipe(b[i]) != extrai_naipe(b[i-1]) and extrai_valor(b[i]) != extrai_valor(b[i-1]):
         return mov_pos
-    if i - 3 < 0:
+    if (i - 3) < 0:
         return mov_pos
-    if i < len(baralho) and i > 2 and extrai_naipe(baralho[i]) == extrai_naipe(baralho[i-3]) or extrai_valor(baralho[i]) == extrai_valor(baralho[i-3]):
+    if i < len(b) and i > 2 and extrai_naipe(b[i]) == extrai_naipe(b[i-3]) or extrai_valor(b[i]) == extrai_valor(b[i-3]):
         mov_pos.append(3)
     return mov_pos
+
+    # INCOMPLETA #
+def empilha(baralho, i, f):     # Quinta função na página do EP2
+    destino = baralho[f]
+    origem = baralho[i]
+    del baralho[f]
+    return baralho
