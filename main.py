@@ -22,3 +22,13 @@ def cria_baralho():             #Primeira função na página do EP2
         embaralhado.append(cartas[random.randint(0, len(cartas) - 1)])
         cartas.remove(embaralhado[len(embaralhado) - 1])
     return embaralhado
+
+def extrai_naipe(carta):
+    naipe = carta[-1]
+    return naipe
+
+def extrai_valor(carta):
+    if len(carta) == 2:
+        return carta[0]
+    if len(carta) == 3:
+        return carta[0:2]
