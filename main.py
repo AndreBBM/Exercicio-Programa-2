@@ -57,3 +57,19 @@ def empilha(baralho, i, f):     # Quinta função na página do EP2
         baralho[f] = baralho[i]
         del baralho[i]
         return baralho
+
+
+def possui_movimentos_possiveis(baralho):   #Sexta e última função da página do EP2
+    for i in range(0, len(baralho)):
+        movimentos = lista_movimentos_possiveis(baralho, i)
+        if len(movimentos) > 0:
+            return True
+    return False
+
+
+
+
+
+
+
+
