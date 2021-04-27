@@ -1,14 +1,14 @@
 import random
 
 
-def cria_baralho():             #Primeira função na página do EP2
+def cria_baralho():             # Primeira função na página do EP2
     cartas = []
     embaralhado = []
     naipe = ['♠', '♥', '♦', '♣']
     k = -1
-    while len(cartas) != 52:    #repete o loop a seguir 4 vezes, mudando o naipe
+    while len(cartas) != 52:    # Repete o loop a seguir 4 vezes, mudando o naipe
         k += 1
-        for i in range(2, 15):  #dá as cartas de 2 a A
+        for i in range(2, 15):  # Coloca as cartas de 2 a A
             if i == 11:
                 i = 'J'
             elif i == 12:
@@ -18,17 +18,38 @@ def cria_baralho():             #Primeira função na página do EP2
             elif i == 14:
                 i = 'A'
             cartas.append(str(i) + naipe[k])
-    while len(cartas) > 0:      #Embaralha a sequência de cartas
+    while len(cartas) > 0:      # Embaralha a sequência de cartas
         embaralhado.append(cartas[random.randint(0, len(cartas) - 1)])
         cartas.remove(embaralhado[len(embaralhado) - 1])
-    return embaralhado
+    return embaralhado          # Cartas são dadas assim
 
-def extrai_naipe(carta):
+def extrai_naipe(carta):        # Segunda função na página do EP2
     naipe = carta[-1]
     return naipe
+# Escolher qual das duas usar
+def extrai_naipe(carta):
+     if len(carta) == 3:
+         naipe = carta[2]
+     else:
+         naipe = carta[1]
+     return naipe
 
-def extrai_valor(carta):
+def extrai_valor(carta):        # Terceira função na página do EP2
     if len(carta) == 2:
         return carta[0]
     if len(carta) == 3:
         return carta[0:2]
+
+def lista_movimentos_possiveis(baralho,i):  # Quarta função na página do EP2
+    mov_pos = []
+    if i == 0:
+        return mov_pos
+    if i < len(baralho) and i > 0 and extrai_naipe(baralho[i]) == extrai_naipe(baralho[i-1]) or extrai_valor(baralho[i]) == extrai_valor(baralho[i-1]):
+        mov_pos.append(1)
+    if i == 2 and extrai_naipe(baralho[i]) != extrai_naipe(baralho[i-1]) and extrai_valor(baralho[i]) != extrai_valor(baralho[i-1]):
+        return mov_pos
+    if i - 3 < 0:
+        return mov_pos
+    if i < len(baralho) and i > 2 and extrai_naipe(baralho[i]) == extrai_naipe(baralho[i-3]) or extrai_valor(baralho[i]) == extrai_valor(baralho[i-3]):
+        mov_pos.append(3)
+    return mov_pos
