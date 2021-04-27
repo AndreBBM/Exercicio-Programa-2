@@ -17,7 +17,7 @@ def cria_baralho():             # Primeira função na página do EP2
                 i = 'K'
             elif i == 14:
                 i = 'A'
-            cartas.append(str(i) + naipe[k])
+            cartas.append(str(i) + naipe[k])  # Junta o número da carta com o naipe 
     while len(cartas) > 0:      # Embaralha a sequência de cartas
         embaralhado.append(cartas[random.randint(0, len(cartas) - 1)])
         cartas.remove(embaralhado[len(embaralhado) - 1])
@@ -40,11 +40,11 @@ def lista_movimentos_possiveis(b,i):  # Quarta função na página do EP2  -> b 
     mov_pos = []                      # Lista de movimentos possíveis
     if i == 0:
         return mov_pos
-    if len(b) > i > 0 and extrai_naipe(b[i]) == extrai_naipe(b[i - 1]) or extrai_valor(b[i]) == extrai_valor(b[i - 1]):
+    if i < len(b) and i > 0 and extrai_naipe(b[i]) == extrai_naipe(b[i - 1]) or extrai_valor(b[i]) == extrai_valor(b[i - 1]):
         mov_pos.append(1)
     if (i - 3) < 0:
         return mov_pos
-    if len(b) > i > 2 and extrai_naipe(b[i]) == extrai_naipe(b[i - 3]) or extrai_valor(b[i]) == extrai_valor(b[i - 3]):
+    if i < len(b) and i > 2 and extrai_naipe(b[i]) == extrai_naipe(b[i - 3]) or extrai_valor(b[i]) == extrai_valor(b[i - 3]):
         mov_pos.append(3)
     return mov_pos
 
@@ -59,17 +59,12 @@ def empilha(baralho, i, f):     # Quinta função na página do EP2
         return baralho
 
 
-def possui_movimentos_possiveis(baralho):   #Sexta e última função da página do EP2
-    for i in range(0, len(baralho)):
+def possui_movimentos_possiveis(baralho):   # Sexta e última função da página do EP2
+    for i in range(0, len(baralho)):        # Olhando para uma carta de cada vez, ver se ela tem algum movimento possível 
         movimentos = lista_movimentos_possiveis(baralho, i)
-        if len(movimentos) > 0:
+        if len(movimentos) > 0:             # Se alguma das cartas puder ser movida, retornar True
             return True
-    return False
-
-
-
-
-
+    return False                            # Se não tiver, retornar False
 
 
 
