@@ -70,7 +70,7 @@ def possui_movimentos_possiveis(baralho):  # Sexta e última função da página
     return False  # Se não tiver, retornar False
 
 
-def print_colorido(carta):  # devolve uma cor para a carta dependendo do naipe
+def print_colorido(carta):  # Devolve uma cor para a carta dependendo do naipe
     cor = ''
     if extrai_naipe(carta) == '♠':
         cor = 'red'
@@ -112,45 +112,48 @@ Para que o movimento seja realizado, uma das duas condições a seguir precisa s
 2. As duas cartas devem ter o mesmo número
 ''')
 
-vamo = input('''Então, vamos jogar?!
-(digite "sim" para iniciar)''')
-while vamo.lower() != 'sim':
-    vamo = input('''Então, vamos jogar?!''')
+jogar = True
+while jogar:
+    vamo = input('''Então, vamos jogar?!
+    Digite "sim" para iniciar): ''')
+    if vamo.lower() != 'sim':
+        print('''Esperamos que tenha se divertido!''')
+        break
 
-baralho_atual = cria_baralho()
+    baralho_atual = cria_baralho()
 
-while possui_movimentos_possiveis(baralho_atual):  # Continua possibilitando jogadas até não haver mais
+    while possui_movimentos_possiveis(baralho_atual):  # Continua possibilitando jogadas até não haver mais
+
+        imprime_b_atual(baralho_atual)  # Imprime o baralho
+        jogada = input('Escolha uma carta para empilhar: ')  # Jogador escolhe uma carta
+        jogada = eh_int(jogada)[1]  # Verifica se é um número válido
+
+        possivel = lista_movimentos_possiveis(baralho_atual, jogada - 1)
+        while len(possivel) == 0:
+            print('\nA carta', baralho_atual[jogada - 1], 'Não pode ser empilhada')
+            jogada = input('Escolha outra carta para empilhar: ')
+            jogada = eh_int(jogada)[1]
+            possivel = lista_movimentos_possiveis(baralho_atual, (jogada - 1))
+
+        if len(possivel) == 1 and possivel[0] == 1:  # Se só é empilhável com a anterior
+            empilha(baralho_atual, jogada - 1, jogada - 2)
+        elif len(possivel) == 1 and possivel[0] == 3:  # Se só é empilhável com a 3a anterior
+            empilha(baralho_atual, jogada - 1, jogada - 4)
+        elif len(possivel) == 2:  # Se há dois movimentos possíveis
+            print('{}. {}'.format((jogada - 3),
+                              colored(baralho_atual[jogada - 4], print_colorido(baralho_atual[jogada - 4]))))
+            print('{}. {}'.format((jogada - 1),
+                              colored(baralho_atual[jogada - 2], print_colorido(baralho_atual[jogada - 2]))))
+            jogada_f = input('Escolha uma carta para empilhar: ')
+            jogada_f = eh_int(jogada_f)[1]
+            while jogada_f != baralho_atual.index(baralho_atual[jogada - 1]) and jogada_f != baralho_atual.index(
+                    baralho_atual[jogada - 3]):
+                jogada_f = input('Essa carta não pode ser empilhada, digite o número de outra carta: ')
+                jogada_f = eh_int(jogada_f)[1]
+            empilha(baralho_atual, jogada - 1, jogada_f - 1)
 
     imprime_b_atual(baralho_atual)
-    jogada = input('Escolha uma carta para empilhar')
-    jogada = eh_int(jogada)[1]
-
-    possivel = lista_movimentos_possiveis(baralho_atual, jogada - 1)
-    while len(possivel) == 0:
-        print('\nA carta', baralho_atual[jogada - 1], 'Não pode ser empilhada')
-        jogada = input('Escolha outra carta para empilhar')
-        jogada = eh_int(jogada)[1]
-        possivel = lista_movimentos_possiveis(baralho_atual, (jogada - 1))
-
-    if len(possivel) == 1 and possivel[0] == 1:  # Se só é empilhável com a anterior
-        empilha(baralho_atual, jogada - 1, jogada - 2)
-    elif len(possivel) == 1 and possivel[0] == 3:  # se só é empilhável com a 3a anterior
-        empilha(baralho_atual, jogada - 1, jogada - 4)
-    elif len(possivel) == 2:  # Se há dois movimentos possíveis
-        print('{}. {}'.format((jogada - 3),
-                              colored(baralho_atual[jogada - 4], print_colorido(baralho_atual[jogada - 4]))))
-        print('{}. {}'.format((jogada - 1),
-                              colored(baralho_atual[jogada - 2], print_colorido(baralho_atual[jogada - 2]))))
-        jogada_f = input('escolha uma carta para empilhar')
-        jogada_f = eh_int(jogada_f)[1]
-        while jogada_f != baralho_atual.index(baralho_atual[jogada - 1]) and jogada_f != baralho_atual.index(
-                baralho_atual[jogada - 3]):
-            jogada_f = input('Essa carta não pode ser empilhada, digite o número de outra carta')
-            jogada_f = eh_int(jogada_f)[1]
-        empilha(baralho_atual, jogada - 1, jogada_f - 1)
-
-imprime_b_atual(baralho_atual)
-if len(baralho_atual) == 1:
-    print('GANHOU!')
-else:
-    print('PERDEU!')
+    if len(baralho_atual) == 1:
+        print('GANHOU!')
+    else:
+        print('PERDEU!')
