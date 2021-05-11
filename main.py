@@ -1,3 +1,19 @@
+'''
+IMPORTANTE!!!
+
+Se for acessar o jogo pelo VS code e este estiver ligado ao anaconda, antes de tudo, 
+precisa instalar o termcolor no anaconda.
+
+COMO FAZER ISSO?
+Vá em 'Terminal'. E clique em 'Novo Terminal'. Ao criar um novo terminal, escreva:
+"conda install -c omnia termcolor" (sem as aspas)
+e dê enter.
+
+Viu como é fácil?
+Agora é só botar o código pra rodar!!
+Divirta-se!!!
+'''
+
 import random
 from termcolor import colored
 
@@ -115,7 +131,7 @@ Para que o movimento seja realizado, uma das duas condições a seguir precisa s
 jogar = True
 while jogar:
     vamo = input('''Então, vamos jogar?!
-    Digite "sim" para iniciar): ''')
+    Digite "sim" para iniciar: ''')
     if vamo.lower() != 'sim':
         print('''Esperamos que tenha se divertido!''')
         break
